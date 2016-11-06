@@ -1,4 +1,4 @@
-package edu.cmu.gardner.semantic_parsing.ccg
+package com.mattg.semantic_parsing.ccg
 
 // A Category in CCG is a combination of syntactic information and semantic information.  As a
 // first pass, I'm just going to include syntactic information (things like N/N).

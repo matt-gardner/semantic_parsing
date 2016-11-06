@@ -1,7 +1,7 @@
-package edu.cmu.gardner.semantic_parsing.ccg
+package com.mattg.semantic_parsing.ccg
 
-import edu.cmu.ml.rtw.users.matt.util.FileUtil
-import edu.cmu.ml.rtw.users.matt.util.JsonHelper
+import com.mattg.util.FileUtil
+import com.mattg.util.JsonHelper
 
 import org.json4s._
 
@@ -14,7 +14,7 @@ class CcgParser(params: JValue, fileUtil: FileUtil = new FileUtil) {
     val lexiconPath = JsonHelper.extractWithDefault(params, "lexicon file", null:String)
     val builder = new LexiconBuilder
     if (lexiconPath != null) {
-      for (line <-fileUtil.readLinesFromFile(lexiconPath).asScala) {
+      for (line <-fileUtil.readLinesFromFile(lexiconPath)) {
         val fields = line.split(" +")
         val word = fields(0)
         val category = fields(1)

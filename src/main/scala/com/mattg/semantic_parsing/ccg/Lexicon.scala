@@ -1,4 +1,4 @@
-package edu.cmu.gardner.semantic_parsing.ccg
+package com.mattg.semantic_parsing.ccg
 
 import scala.collection.mutable
 

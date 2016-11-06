@@ -1,8 +1,8 @@
-package edu.cmu.gardner.semantic_parsing.ccg
+package com.mattg.semantic_parsing.ccg
 
 import org.scalatest._
 
-import edu.cmu.ml.rtw.users.matt.util.FakeFileUtil
+import com.mattg.util.FakeFileUtil
 
 import org.json4s._
 import org.json4s.JsonDSL._
