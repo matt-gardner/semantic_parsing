@@ -27,7 +27,7 @@ class CcgParser(params: JValue, fileUtil: FileUtil = new FileUtil) {
 }
 
 object CcgParser {
-  def main(args: Array[String]) {
+  def NOT_main(args: Array[String]) {
     println("Hello world!")
   }
 }
