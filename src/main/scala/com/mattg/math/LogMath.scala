@@ -16,4 +16,24 @@ object LogMath {
   def logSum(logProbs: Seq[Double]): Double = {
     logProbs.foldLeft(Double.NegativeInfinity)(logSum)
   }
+
+  def logNormalize(logDistributions: Seq[Array[Double]]) {
+    logDistributions.map(logNormalize)
+  }
+
+  /**
+   * Takes an unnormalized distribution of expected log counts, and produces a normalized
+   * probability distribution (no longer in log space).  This is done _in place_.
+   */
+  def logNormalize(logDistribution: Array[Double]) {
+    val totalLogProb = logSum(logDistribution)
+    val totalProb = math.exp(totalLogProb)
+    for (i <- (0 until logDistribution.length)) {
+      logDistribution(i) = if (totalProb == Double.NegativeInfinity || totalProb == Double.NaN) {
+        0
+      } else {
+        math.exp(logDistribution(i)) / totalProb
+      }
+    }
+  }
 }

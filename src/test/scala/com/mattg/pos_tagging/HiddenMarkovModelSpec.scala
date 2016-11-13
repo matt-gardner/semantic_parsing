@@ -1,11 +1,14 @@
 package com.mattg.pos_tagging
 
 import com.mattg.math.LogMath
+import com.mattg.util.MutableConcurrentDictionary
 
 import org.scalatest._
 
 class HiddenMarkovModelSpec extends FlatSpecLike with Matchers {
-  val model = new HiddenMarkovModel(5, 3)
+  val tokenDictionary = new MutableConcurrentDictionary()
+  val tagDictionary = new MutableConcurrentDictionary()
+  val model = new HiddenMarkovModel(5, 3, tokenDictionary, tagDictionary)
   model.transitionProbs(0) = Array(.3, .1, .59, 0, .01)
   model.transitionProbs(1) = Array(.5, .2, .2, 0, .1)
   model.transitionProbs(2) = Array(.01, .01, .5, 0, .5)
@@ -15,10 +18,10 @@ class HiddenMarkovModelSpec extends FlatSpecLike with Matchers {
   model.emissionProbs(1) = Array(.8, .05, .05, .05, .05)
   model.emissionProbs(2) = Array(.05, .05, .05, .05, .8)
 
-  "forward" should "have final state probabilities sum to one over all possible sequences" in {
+  "forward" should "compute correct probabilities" in {
     // This test case taken from an example in Dan Jurafsky's textbook:
     // https://web.stanford.edu/~jurafsky/slp3/8.pdf.
-    val model = new HiddenMarkovModel(3, 2)
+    val model = new HiddenMarkovModel(3, 2, tokenDictionary, tagDictionary)
     model.transitionProbs(0) = Array(.6, .3, 0, .1)  // state 0 is "HOT"
     model.transitionProbs(1) = Array(.4, .5, 0, .1)  // state 1 is "COLD"
     model.transitionProbs(2) = Array(.8, .2, 0, 0)  // state 2 is "start"
